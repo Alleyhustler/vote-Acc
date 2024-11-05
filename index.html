@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trump Accelerationism</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Black background for the page */
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+            font-family: Arial, sans-serif;
+            color: white;
+            position: relative;
+        }
+
+        /* Container for text elements in the top-left corner */
+        .top-left {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        /* Styling for each line with typing effect */
+        .typing {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid cyan;
+            animation: typing 2s steps(30, end), blink-caret 0.7s step-end infinite;
+            font-size: 1.5rem;
+            color: cyan;
+        }
+
+        /* Custom styling for title and subtitle */
+        .title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: cyan;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #aaa;
+        }
+
+        /* Typing animation for different elements with delays */
+        .title { animation-delay: 0s; }
+        .subtitle { animation-delay: 2.5s; }
+        .link-twitter { animation-delay: 4s; }
+        .link-ca { animation-delay: 5.5s; }
+
+        /* Typing and caret animations */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: cyan; }
+        }
+
+        /* Moving image styling */
+        #moving-image {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            transition: transform 0.1s, opacity 0.1s;
+            filter: drop-shadow(0 0 8px cyan) brightness(1.5);
+            opacity: 0.7;
+            animation: flash 0.05s infinite alternate;
+        }
+
+        /* Flash animation for lightning effect */
+        @keyframes flash {
+            0% { opacity: 0.5; filter: drop-shadow(0 0 12px cyan); }
+            100% { opacity: 1; filter: drop-shadow(0 0 20px cyan); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Moving Image -->
+    <img src="Progetto_senza_titolo__11_-removebg-preview.png" id="moving-image" alt="Moving Image">
+
+    <!-- Top-left Title, Subtitle, and Links with Typing Effect -->
+    <div class="top-left">
+        <div class="title typing">Trump Accelerationism</div>
+        <div class="subtitle typing">vote/acc</div>
+        <a href="https://twitter.com" class="link-twitter typing" target="_blank">Twitter</a>
+        <a href="https://example.com" class="link-ca typing" target="_blank">CA: HERE</a>
+    </div>
+
+    <script>
+        const image = document.getElementById('moving-image');
+
+        // Initial position and speed
+        let posX = Math.random() * window.innerWidth;
+        let posY = Math.random() * window.innerHeight;
+
+        function randomizeMovement() {
+            // Create random offsets in a range to achieve the erratic lightning effect
+            const offsetX = (Math.random() - 0.5) * 100;
+            const offsetY = (Math.random() - 0.5) * 100;
+
+            // Update position, ensuring it stays within window bounds
+            posX = Math.min(window.innerWidth - image.clientWidth, Math.max(0, posX + offsetX));
+            posY = Math.min(window.innerHeight - image.clientHeight, Math.max(0, posY + offsetY));
+
+            // Apply position to the image with a slight transform for a lightning-like snap effect
+            image.style.transform = `translate(${posX}px, ${posY}px) rotate(${Math.random() * 360}deg)`;
+
+            // Speed up or slow down based on random intervals to intensify randomness
+            const speed = Math.random() * 50 + 50;
+            setTimeout(randomizeMovement, speed);
+        }
+
+        // Start the movement
+        randomizeMovement();
+
+        // Update window size on resize
+        window.addEventListener('resize', () => {
+            posX = Math.min(posX, window.innerWidth - image.clientWidth);
+            posY = Math.min(posY, window.innerHeight - image.clientHeight);
+        });
+    </script>
+</body>
+</html>
